@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+<center>
+<p>
+  <strong>Iamge:</strong>
+  <%= image_tag @post.image.url, class:"imageupload" %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @post.content %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @post.user.full_name %>
+</p>
+<% unless @post.user_id == current_user.id %>
+ <% if @favorite.present? %>
+   <%= link_to 'Cancel favorite', favorite_path(id: @favorite.id), method: :delete, class: 'btn btn-danger' %>
+ <% else %>
+   <p>
+   <%= link_to 'Make it a favorite', favorites_path(post_id: @post.id), method: :post, class: 'btn btn-primary' %></p>
+ <% end %>
+<% end %>
+<%= link_to 'Comfirm', posts_path, data: { confirm: 'Are you sure do you want to post this post?' }, class:"btn btn-primary" %>
+<%= link_to 'Back', edit_post_path(@post), class:"btn btn-warning" %>
+</center>

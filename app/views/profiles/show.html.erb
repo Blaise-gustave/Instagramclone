@@ -1,0 +1,7 @@
+<p id="notice"><%= notice %></p>
+<center>
+  <%= image_tag @profile.image.url, class:"brand_logo" %>
+  <%= current_user.full_name %>
+<%= link_to 'Comfirm', profiles_path, data: { confirm: 'Are you sure do you want to choose this photo?' }, class:"btn btn-warning" %>
+<%= link_to 'Edit', edit_profile_path(@profile), class:"btn btn-primary" %>
+</center>

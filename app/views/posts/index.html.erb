@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+<%= link_to 'My Favorites', favorites_path, class:"btn btn-primary btn-block" %>
+<%= link_to 'New Post', new_post_path, class:"btn btn-primary btn-block" %>
+<div class=" d-flex justify-content-center mt-5">  
+  <div class="row">
+    <% @posts.each do |post| %>
+      <div class="col-8">
+        <div class="card" style="width: 35rem;">
+          <span class="card-header"> 
+            <%= image_tag("https://img.icons8.com/windows/50/000000/user.png", class:"rounded")%>    
+            <%= post.user.full_name %>
+          </span>
+          <%if post.image.present?%>
+            <%= image_tag post.image.url(), class:"card-img-top" %>
+          <%else%>
+          <%end%>    
+          <div class="card-body">
+            <p class="card-text"><%= post.content %></p>
+            <% if post.user.full_name == current_user.full_name %>
+              <div class="text-center">
+                <%= link_to 'Show', post , class:"btn btn-dark" %>
+                <%= link_to 'Edit', edit_post_path(post), class:"btn btn-dark" %>
+                <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-dark" %>
+              </div>
+            <%else%>
+              <div class="text-center">
+                <%= link_to 'Set A favorite', post , class:"btn btn-dark" %>        
+              </div>
+            <%end%>
+          </div>
+        </div>
+      </div><br><br>      
+    <% end %>
+  </div>
+</div>
+
